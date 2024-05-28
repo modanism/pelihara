@@ -18,6 +18,8 @@ import NextIcon from "@/components/icons/NextIcon";
 import ProductCard from "@/components/cards/ProductCard";
 import ProductCarousel from "@/components/carousel/ProductCarousel";
 import { useRouter } from "next/navigation";
+import StoreCard from "@/components/cards/StoreCard";
+import StoreCarousel from "@/components/carousel/StoreCarousel";
 
 const Home = () => {
   const toast = useToast();
@@ -135,7 +137,7 @@ const Home = () => {
           <div className="w-full ">
             <div className="w-full flex justify-between mb-[13px] px-[16px]">
               <p className="font-dm text-[12px] font-[400] text-green-300">
-                Rekomendasi Produk
+                Toko Terdekat
               </p>
               <div className="cursor-pointer flex items-center justify-center">
                 <p className="font-dm text-[12px] font-[500] text-green-normal">
@@ -145,7 +147,7 @@ const Home = () => {
               </div>
             </div>
             <div className="w-full ">
-              <ProductCarousel />
+              <StoreCarousel />
             </div>
           </div>
         </div>
