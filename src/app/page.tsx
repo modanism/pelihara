@@ -1,113 +1,159 @@
+"use client";
+
+import HomeSvg from "@/assets/svgs/HomeSvg";
+import WithAuth from "@/components/auth/WithAuth";
+import BottomNav from "@/components/navigation/BottomNav";
 import Image from "next/image";
+import PeliharaLogo from "@/assets/images/pelihara_logo.png";
+import PetFoodImg from "@/assets/images/pet_food.png";
+import GroomImg from "@/assets/images/grooming.png";
+import VetImg from "@/assets/images/vet.png";
 
-export default function Home() {
+import { auth } from "@/utils/firebase";
+import { Button, useToast } from "@chakra-ui/react";
+import { signOut } from "firebase/auth";
+import PlusButton from "@/components/buttons/PlusButton";
+import SlickCarousel from "@/components/carousel/SlickCarousel";
+import NextIcon from "@/components/icons/NextIcon";
+import ProductCard from "@/components/cards/ProductCard";
+import ProductCarousel from "@/components/carousel/ProductCarousel";
+import { useRouter } from "next/navigation";
+import StoreCard from "@/components/cards/StoreCard";
+import StoreCarousel from "@/components/carousel/StoreCarousel";
+
+const Home = () => {
+  const toast = useToast();
+
+  const router = useRouter();
+
+  const handleComingSoon = () => {
+    toast({
+      title: "This feature is coming soon!",
+      status: "info",
+      duration: 5000,
+      isClosable: true,
+    });
+  };
+
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:size-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <WithAuth>
+      <main className="flex min-h-screen flex-col items-center bg-gray-700">
+        <div className="relative bg-white flex flex-col items-center w-screen mobile:w-[440px] pb-[100px] gap-[20px] h-screen overflow-y-scroll hide-scrollbar">
+          <BottomNav />
+          <div className="w-full bg-[#A0CABB] min-h-[164px] relative px-[16px] flex flex-col justify-center items-center gap-[6px]">
+            <div className="w-full">
+              <Image src={PeliharaLogo} alt="Pelihara Logo" />
+            </div>
+            <div className="w-full">
+              <h1 className="text-[24px] font-jkt font-[700] text-white">
+                Selamat Datang!
+              </h1>
+            </div>
+
+            <div className="absolute bottom-[-20%] border-[1px] border-green-200 flex gap-[22px] bg-white z-[2] justify-center items-center px-[16px] py-[10px] rounded-[18px]">
+              <div className="flex justify-center items-center gap-[5px]">
+                <span className="text-[31px]">&#128570;</span>
+                <span className="text-[31px]">&#128054;</span>
+              </div>
+              <p className="font-dm text-[16px] text-green-200 font-[500]">
+                Tambahkan profil peliharaanmu!
+              </p>
+              <PlusButton onClick={handleComingSoon} />
+            </div>
+            <svg
+              className="absolute right-0"
+              xmlns="http://www.w3.org/2000/svg"
+              width="154"
+              height="164"
+              viewBox="0 0 154 164"
+              fill="none"
+            >
+              <path
+                opacity="0.5"
+                fill-rule="evenodd"
+                clip-rule="evenodd"
+                d="M11.0609 26.0571C21.7745 -3.3862 47.2642 -15.2858 67.7819 -33.6815C86.3751 -50.3516 102.639 -76.1637 125.149 -76.2311C147.414 -76.2978 165.909 -54.459 181.84 -34.0232C195.434 -16.5847 197.579 9.60033 208.196 30.3009C223.766 60.6583 257.967 78.2981 258.222 114.903C258.473 150.919 234.667 184.643 209.368 198.519C185.442 211.642 160.13 187.383 134.439 182.796C115.004 179.325 96.0186 182.846 77.3492 174.946C52.2614 164.33 21.7244 159.357 8.41685 129.467C-5.17015 98.9498 -0.545607 57.9545 11.0609 26.0571Z"
+                fill="url(#paint0_linear_236_3516)"
+              />
+              <defs>
+                <linearGradient
+                  id="paint0_linear_236_3516"
+                  x1="11.2247"
+                  y1="15.9222"
+                  x2="269.55"
+                  y2="69.7214"
+                  gradientUnits="userSpaceOnUse"
+                >
+                  <stop stop-color="#CFEFE3" />
+                  <stop offset="1" stop-color="#346E55" />
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+          <div className="w-full pt-[50px] px-[16px]">
+            <h2 className="text-[#0B0A0A] font-dm font-[700] mb-[16px]">
+              Cari kebutuhan untuk peliharaanmu!
+            </h2>
+            <div className="w-full flex justify-between">
+              <div className="cursor-pointer" onClick={handleComingSoon}>
+                <Image src={PetFoodImg} alt="Pet Food" className="mb-[6px]" />
+                <p className="text-center text-green-200 text-[12px] font-dm font-[700]">
+                  Makanan
+                </p>
+              </div>
+              <div className="cursor-pointer" onClick={() => {router.push("/grooming")}}>
+                <Image src={GroomImg} alt="Pet Food" className="mb-[6px]" />
+                <p className="text-center text-green-200 text-[12px] font-dm font-[700]">
+                  Grooming
+                </p>
+              </div>
+              <div className="cursor-pointer" onClick={handleComingSoon}>
+                <Image src={VetImg} alt="Pet Food" className="mb-[6px]" />
+                <p className="text-center text-green-200 text-[12px] font-dm font-[700]">
+                  Vet
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="w-full px-[16px]">
+            <SlickCarousel />
+          </div>
+          <div className="w-full  pt-[32px]">
+            <div className="w-full flex justify-between mb-[13px] px-[16px]">
+              <p className="font-dm text-[12px] font-[400] text-green-300">
+                Rekomendasi Produk
+              </p>
+              <div className="cursor-pointer flex items-center justify-center">
+                <p className="font-dm text-[12px] font-[500] text-green-normal">
+                  Lihat Selengkapnya
+                </p>
+                <NextIcon />
+              </div>
+            </div>
+            <div className="w-full ">
+              <ProductCarousel />
+            </div>
+          </div>
+          <div className="w-full ">
+            <div className="w-full flex justify-between mb-[13px] px-[16px]">
+              <p className="font-dm text-[12px] font-[400] text-green-300">
+                Toko Terdekat
+              </p>
+              <div className="cursor-pointer flex items-center justify-center">
+                <p className="font-dm text-[12px] font-[500] text-green-normal">
+                  Lihat Selengkapnya
+                </p>
+                <NextIcon />
+              </div>
+            </div>
+            <div className="w-full ">
+              <StoreCarousel />
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div className="relative z-[-1] flex place-items-center before:absolute before:h-[300px] before:w-full before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-full after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 sm:before:w-[480px] sm:after:w-[240px] before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Docs{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Learn{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Templates{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-sm opacity-50">
-            Explore starter templates for Next.js.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className="mb-3 text-2xl font-semibold">
-            Deploy{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className="m-0 max-w-[30ch] text-balance text-sm opacity-50">
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </main>
+    </WithAuth>
   );
-}
+};
+
+export default Home;
