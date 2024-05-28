@@ -12,6 +12,7 @@ export const theme = extendTheme({
   },
   colors: {
     white: "#FFFFFF",
+    "green-normal":"#1E8776",
     "green-100": "#89BFAB",
     "green-200": "#5A8F7B",
     "green-300": "#346E56",

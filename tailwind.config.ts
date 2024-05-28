@@ -1,3 +1,4 @@
+import plugin from "tailwindcss";
 import { theme } from "./src/utils/theme";
 import type { Config } from "tailwindcss";
 
@@ -8,6 +9,8 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: theme,
-  plugins: [],
+  plugins: [
+    
+  ],
 };
 export default config;

@@ -24,7 +24,6 @@ const Profile = () => {
           <h1 className="text-green-200 text-[36px] font-jkt font-bold">
             Profile
           </h1>
-          <p className="text-black text-[14px] font-inter">Pelihara</p>
           <Button
             backgroundColor={"#5A8F7B"}
             textColor={"black"}

@@ -26,6 +26,17 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* Hide scrollbars but allow scrolling */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* For Firefox */
+.hide-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;

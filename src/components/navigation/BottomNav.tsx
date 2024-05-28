@@ -22,7 +22,7 @@ export default function BottomNav() {
   };
 
   return (
-    <nav className="z-[10] rounded-t-xl shadow-[rgba(0,0,0,0.15)_1px_-3px_30px_-1px] bg-[#F9F9F9] absolute bottom-0 w-full flex gap-[24px] justify-center items-center h-[74px]">
+    <nav className="z-[10] rounded-t-xl shadow-[rgba(0,0,0,0.15)_1px_-3px_30px_-1px] bg-[#F9F9F9] fixed bottom-0 w-screen mobile:w-[440px] flex gap-[24px] justify-center items-center h-[74px]">
       <div
         onClick={() => {
           router.push("/");

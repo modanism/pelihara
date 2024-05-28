@@ -1,6 +1,5 @@
 "use client";
 
-import HomeSvg from "@/assets/svgs/HomeSvg";
 import WithAuth from "@/components/auth/WithAuth";
 import BottomNav from "@/components/navigation/BottomNav";
 import Image from "next/image";
@@ -9,20 +8,14 @@ import PetFoodImg from "@/assets/images/pet_food.png";
 import GroomImg from "@/assets/images/grooming.png";
 import VetImg from "@/assets/images/vet.png";
 
-import { auth } from "@/utils/firebase";
-import { Button, useToast } from "@chakra-ui/react";
-import { signOut } from "firebase/auth";
+import { useToast } from "@chakra-ui/react";
 import PlusButton from "@/components/buttons/PlusButton";
 import SlickCarousel from "@/components/carousel/SlickCarousel";
 import NextIcon from "@/components/icons/NextIcon";
-import ProductCard from "@/components/cards/ProductCard";
 import ProductCarousel from "@/components/carousel/ProductCarousel";
-import { useRouter } from "next/navigation";
 
-const Home = () => {
+const Grooming = () => {
   const toast = useToast();
-
-  const router = useRouter();
 
   const handleComingSoon = () => {
     toast({
@@ -37,14 +30,13 @@ const Home = () => {
     <WithAuth>
       <main className="flex min-h-screen flex-col items-center bg-gray-700">
         <div className="relative bg-white flex flex-col items-center w-screen mobile:w-[440px] pb-[100px] gap-[20px] h-screen overflow-y-scroll hide-scrollbar">
-          <BottomNav />
           <div className="w-full bg-[#A0CABB] min-h-[164px] relative px-[16px] flex flex-col justify-center items-center gap-[6px]">
             <div className="w-full">
               <Image src={PeliharaLogo} alt="Pelihara Logo" />
             </div>
             <div className="w-full">
-              <h1 className="text-[24px] font-jkt font-[700] text-white">
-                Selamat Datang!
+              <h1 className="text-[24px] font-jkt font-[700] text-green-300 z-[3]">
+                Peliharaanmu mau Perawatan apa?
               </h1>
             </div>
 
@@ -59,7 +51,7 @@ const Home = () => {
               <PlusButton onClick={handleComingSoon} />
             </div>
             <svg
-              className="absolute right-0"
+              className="absolute right-0 z-[1]"
               xmlns="http://www.w3.org/2000/svg"
               width="154"
               height="164"
@@ -87,34 +79,6 @@ const Home = () => {
                 </linearGradient>
               </defs>
             </svg>
-          </div>
-          <div className="w-full pt-[50px] px-[16px]">
-            <h2 className="text-[#0B0A0A] font-dm font-[700] mb-[16px]">
-              Cari kebutuhan untuk peliharaanmu!
-            </h2>
-            <div className="w-full flex justify-between">
-              <div className="cursor-pointer" onClick={handleComingSoon}>
-                <Image src={PetFoodImg} alt="Pet Food" className="mb-[6px]" />
-                <p className="text-center text-green-200 text-[12px] font-dm font-[700]">
-                  Makanan
-                </p>
-              </div>
-              <div className="cursor-pointer" onClick={() => {router.push("/grooming")}}>
-                <Image src={GroomImg} alt="Pet Food" className="mb-[6px]" />
-                <p className="text-center text-green-200 text-[12px] font-dm font-[700]">
-                  Grooming
-                </p>
-              </div>
-              <div className="cursor-pointer" onClick={handleComingSoon}>
-                <Image src={VetImg} alt="Pet Food" className="mb-[6px]" />
-                <p className="text-center text-green-200 text-[12px] font-dm font-[700]">
-                  Vet
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="w-full px-[16px]">
-            <SlickCarousel />
           </div>
           <div className="w-full  pt-[32px]">
             <div className="w-full flex justify-between mb-[13px] px-[16px]">
@@ -154,4 +118,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default Grooming;
