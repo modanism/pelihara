@@ -26,6 +26,8 @@ const Home = () => {
 
   const router = useRouter();
 
+  const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL_PROD
+
   const handleComingSoon = () => {
     toast({
       title: "This feature is coming soon!",
@@ -47,6 +49,9 @@ const Home = () => {
             <div className="w-full">
               <h1 className="text-[24px] font-jkt font-[700] text-white">
                 Selamat Datang!
+              </h1>
+              <h1 className="text-[24px] font-jkt font-[700] text-white">
+                ${backendUrl}
               </h1>
             </div>
 
